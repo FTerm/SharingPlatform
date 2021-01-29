@@ -1,0 +1,11 @@
+server:
+  port: 8070
+
+spring:
+  application:
+    name: sp-provider
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.24.108.55:8848

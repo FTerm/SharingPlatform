@@ -6,7 +6,12 @@
 
     <groupId>com.ckhun</groupId>
     <artifactId>SharingPlatform</artifactId>
+    <packaging>pom</packaging>
     <version>0.1.0</version>
+    <modules>
+        <module>sp-registry</module>
+        <module>sp-config</module>
+    </modules>
 
     <name>SharingPlatform</name>
     <description>共享租赁平台</description>
@@ -31,7 +36,7 @@
         <druid.version>1.2.1</druid.version>
         <validator.version>6.1.6.Final</validator.version>
         <jackson.version>2.11.0</jackson.version>
-        <nacos-discovery-spring-boot.version>0.2.1</nacos-discovery-spring-boot.version>
+        <nacos-discovery-spring-cloud.version>2.2.1.RELEASE</nacos-discovery-spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -78,10 +83,11 @@
     </dependencyManagement>
 
     <dependencies>
+
         <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-discovery-spring-boot-starter</artifactId>
-            <version>${nacos-discovery-spring-boot.version}</version>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>${nacos-discovery-spring-cloud.version}</version>
         </dependency>
 
         <dependency>
