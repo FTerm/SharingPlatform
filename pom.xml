@@ -12,6 +12,7 @@
         <module>sp-registry</module>
         <module>sp-config</module>
         <module>sp-common</module>
+        <module>sp-gateway</module>
     </modules>
 
     <name>SharingPlatform</name>
@@ -90,6 +91,7 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>${nacos-discovery-spring-cloud.version}</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>

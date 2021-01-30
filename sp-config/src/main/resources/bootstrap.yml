@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 120.24.108.55:8848
+      discovery:
+        server-addr: 120.24.108.55:8848
+
+  application:
+    name: sp-config
