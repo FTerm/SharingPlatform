@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: sp-test
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.24.108.55:8848
+

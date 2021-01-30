@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.24.108.55:8848
+
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+      routes:
+        - id: test-router
+          uri: lb://sp-test
+          predicates:
+            - Path=/sp-test/**
+          filters:
+          - StripPrefix=1
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+  application:
+    name: sp-gateway
