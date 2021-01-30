@@ -13,6 +13,7 @@
         <module>sp-config</module>
         <module>sp-common</module>
         <module>sp-gateway</module>
+        <module>sp-goods</module>
     </modules>
 
     <name>SharingPlatform</name>

@@ -1,0 +1,11 @@
+server:
+  port: 8071
+
+spring:
+  application:
+    name: sp-goods
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.24.108.55:8848
