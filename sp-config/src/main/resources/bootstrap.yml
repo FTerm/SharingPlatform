@@ -3,8 +3,12 @@ spring:
     nacos:
       config:
         server-addr: 120.24.108.55:8848
+        username: ckkhh
+        password: Chen778520
       discovery:
         server-addr: 120.24.108.55:8848
+        username: ckkhh
+        password: Chen778520
 
   application:
     name: sp-config
