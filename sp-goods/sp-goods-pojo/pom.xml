@@ -12,7 +12,11 @@
     <artifactId>sp-goods-pojo</artifactId>
 
     <dependencies>
-
+        <!--        mybatis-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
