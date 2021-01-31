@@ -1,8 +1,8 @@
 package com.ckhun.goods.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ckhun.goods.pojo.Goods;
 import com.ckhun.goods.pojo.GoodsItem;
+import com.ckhun.goods.pojo.Mode;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,5 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @Description
  */
 @Mapper
-public interface GoodsMapper extends BaseMapper<Goods> {
+public interface ModeMapper extends BaseMapper<Mode> {
 }

@@ -12,7 +12,17 @@
     <artifactId>sp-goods-pojo</artifactId>
 
     <dependencies>
-        <!--        mybatis-->
+        <dependency>
+            <groupId>com.ckhun</groupId>
+            <artifactId>sp-common</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
