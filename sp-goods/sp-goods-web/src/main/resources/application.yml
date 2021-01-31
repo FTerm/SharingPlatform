@@ -36,8 +36,8 @@ spring:
   #
   ##########################################################
   redis:
-    host: 8.129.15.79
-    password: wudikong123@
+    host: api.ckhun.co
+    password: Chen778520
     spring:
       redis:
         jedis:

@@ -13,7 +13,7 @@ spring:
   ##########################################################
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://api.ckhun.co/sharing_platform?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: ckkhh
     password: Chen778520
@@ -36,8 +36,8 @@ spring:
   #
   ##########################################################
   redis:
-    host: 8.129.15.79
-    password: wudikong123@
+    host: api.ckhun.co
+    password: Chen778520
     spring:
       redis:
         jedis:
