@@ -10,6 +10,7 @@ package com.ckhun.utils;
 public class TimeUtil {
 
     public static Long getCreateTime(){
-        return System.currentTimeMillis()/1000;
+        return System.currentTimeMillis();
     }
+
 }
