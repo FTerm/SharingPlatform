@@ -15,6 +15,7 @@
         <module>sp-gateway</module>
         <module>sp-goods</module>
         <module>sp-test</module>
+        <module>sp-orders</module>
     </modules>
 
     <name>SharingPlatform</name>

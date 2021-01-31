@@ -1,30 +1,23 @@
 package com.ckhun.controller;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author : Kunhong Chan
- * @date : Created in 22:27 2021/1/30
+ * @date : Created in 10:08 2021/1/31
  * @description :
  * @since : 1.0.0
  */
-
+@Api(tags = "订单服务接口")
 @RestController
-@RequestMapping("/user")
-@Api(tags = "用户接口文档")
-public class HelloController {
+@RequestMapping("/orders")
+public class OrdersController {
 
-    /**
-     * 新增用户信息
-     * @return
-     */
-    @ApiOperation(value = "新增用户信息", httpMethod = "GET")
-    @GetMapping("add")
-    public String add() {
+    @GetMapping("/get")
+    public String hello() {
         return "success";
     }
 }
