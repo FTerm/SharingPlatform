@@ -12,16 +12,20 @@
 
     <artifactId>sp-user-pojo</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>com.ckhun</groupId>
-            <artifactId>sp-user-pojo</artifactId>
-            <version>0.1.0</version>
-        </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-annotation</artifactId>
             <version>3.4.1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
     </dependencies>
 

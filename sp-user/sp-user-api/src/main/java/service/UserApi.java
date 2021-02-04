@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description
  */
 
-@FeignClient(name = "sp-user")
+@FeignClient(name = "/sp-user")
 public interface UserApi {
 
     /**
@@ -25,7 +25,7 @@ public interface UserApi {
      * @param UserInfo
      * @return
      */
-    @PostMapping("addUser")
+    @PostMapping("/addUser")
     public R<String> add(@RequestBody UserInfo UserInfo);
 
     /**
@@ -34,7 +34,7 @@ public interface UserApi {
      * @param UserInfo
      * @return
      */
-    @PostMapping("updateUser")
+    @PostMapping("/updateUser")
     public R<Boolean> update(@RequestBody UserInfo UserInfo);
 
     /**
@@ -43,6 +43,6 @@ public interface UserApi {
      * @param id
      * @return
      */
-    @GetMapping("byGoodsCode")
-    public R<UserInfo> goodsByCode(@RequestParam("id") String id);
+    @GetMapping("/byUserCode")
+    public R<UserInfo> userByCode(@RequestParam("id") String id);
 }
