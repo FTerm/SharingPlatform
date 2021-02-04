@@ -10,20 +10,19 @@ import com.ckhun.goods.mapper.GoodsItemMapper;
 import com.ckhun.goods.pojo.Goods;
 import com.ckhun.goods.pojo.GoodsItem;
 import com.ckhun.goods.service.GoodsItemService;
-import com.ckhun.goods.service.GoodsService;
 import com.ckhun.utils.ErrorEnum;
 import com.ckhun.utils.PageResult;
 import com.ckhun.utils.R;
 import com.ckhun.utils.TimeUtil;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +34,7 @@ import java.util.List;
  * @Description
  */
 @RestController
+@RequestMapping("goodsItemApi")
 public class GoodsItemServiceImpl extends ServiceImpl<GoodsItemMapper, GoodsItem> implements GoodsItemService {
 
     @Autowired
@@ -182,4 +182,5 @@ public class GoodsItemServiceImpl extends ServiceImpl<GoodsItemMapper, GoodsItem
         resultR.setData(pageResult);
         return resultR;
     }
+
 }

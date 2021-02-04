@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  */
 @RestController
+@RequestMapping("goodsApi")
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
 
     @Override
@@ -99,6 +101,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
         QueryWrapper<Goods> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("goods_code",goodsCode);
+        queryWrapper.eq("del_flag",TrueOrFalseEnum.FALSE_STAUTS.getFlag());
 
         Goods goods = this.getOne(queryWrapper);
 
@@ -108,12 +111,13 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Override
     @Transactional
-    public R<Boolean> updateGoodsCount(GoodsUpdateCountBO updateCountBO) {
+    public R<Boolean> updateGoodsCount(@RequestBody GoodsUpdateCountBO updateCountBO) {
         AssertException.isNotBlank(updateCountBO.getGoodsCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品编码为空");
         AssertException.isNotNull(updateCountBO.getCount(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品数量为空");
 
         QueryWrapper<Goods> queryWrapper = new QueryWrapper<Goods>()
-                .eq("goods_code",updateCountBO.getGoodsCode());
+                .eq("goods_code",updateCountBO.getGoodsCode())
+                .eq("del_flag",TrueOrFalseEnum.FALSE_STAUTS.getFlag());
         Goods goods = this.getOne(queryWrapper);
         AssertException.isNotNull(goods,ErrorEnum.FAIL.getErrCode(),"商品不存在");
         AssertException.isTrue(updateCountBO.getCount()>=goods.getItemCount(),ErrorEnum.UPDATE_EOR.getErrCode(),"商品总数量小于商品项数量");
@@ -136,6 +140,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
         Page<Goods> page = new Page<>(goodsListBO.getPageNum(),goodsListBO.getPageSize());
         QueryWrapper<Goods> goodsQueryWrapper = new QueryWrapper<>();
+        goodsQueryWrapper.eq("del_flag",TrueOrFalseEnum.FALSE_STAUTS.getFlag());
         if (goodsListBO.getCreateTime()!=null){
             AssertException.isNotNull(goodsListBO.getEndTime(),ErrorEnum.VALIDATION_EOR.getErrCode(),"结束时间为空");
             goodsQueryWrapper.between("create_time",goodsListBO.getCreateTime(),goodsListBO.getEndTime());

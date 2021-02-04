@@ -8,38 +8,28 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * create by one
  *
- * @Date 2021/1/31 0:09
+ * @Date 2021/2/2 13:29
  * @Description
  */
 @Data
-@TableName("g_goods_mode")
-@ApiModel(description = "商品模式",value = "商品模式")
-public class GoodsMode implements Serializable {
+@TableName("g_classify")
+@ApiModel(description = "分类", value = "分类")
+public class Classify {
 
     @TableId(value = "id", type = IdType.AUTO)
     @ApiModelProperty("主键id")
     private Integer id;
 
-    @TableField("goods_code")
-    @ApiModelProperty("商品编码")
+    @TableField("classify_name")
+    @ApiModelProperty("分类名")
+    private String classifyName;
+
+    @TableField("pid")
+    @ApiModelProperty("父id   0 --一级分类")
     private String goodsCode;
-
-    @TableField("mode_id")
-    @ApiModelProperty("商品模式id")
-    private Integer modeId;
-
-    @TableField("price")
-    @ApiModelProperty("价钱")
-    private Long price;
-
-    @TableField("target")
-    @ApiModelProperty("期望价钱")
-    private Long target;
 
     @TableField("status")
     @ApiModelProperty("状态")
@@ -57,4 +47,7 @@ public class GoodsMode implements Serializable {
     @ApiModelProperty("逻辑删除")
     private Integer delFlag;
 
+    @TableField("type")
+    @ApiModelProperty("类型")
+    private Integer type;
 }

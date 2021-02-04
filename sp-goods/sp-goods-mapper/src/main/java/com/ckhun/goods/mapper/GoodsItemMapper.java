@@ -2,7 +2,6 @@ package com.ckhun.goods.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ckhun.goods.pojo.GoodsItem;
-import com.ckhun.goods.pojo.GoodsMode;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

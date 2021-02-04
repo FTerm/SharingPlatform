@@ -1,6 +1,6 @@
 package com.ckhun.goods.dto.goods;
 
-import com.ckhun.goods.bo.goods.GoodsAddBO;
+import com.ckhun.goods.bo.goods.GoodsUpdateCountBO;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -13,6 +13,6 @@ import java.io.Serializable;
  * @Description
  */
 @Data
-@ApiModel("商品新增DTO")
-public class GoodsAddDTO extends GoodsAddBO implements Serializable {
+@ApiModel("商品更新数量DTO")
+public class GoodsUpdateCountDTO extends GoodsUpdateCountBO implements Serializable {
 }

@@ -6,13 +6,9 @@ import com.ckhun.common.AssertException;
 import com.ckhun.goods.bo.mode.ModeAddBO;
 import com.ckhun.goods.bo.mode.ModeDeleteBO;
 import com.ckhun.goods.bo.mode.ModeUpdateBO;
-import com.ckhun.goods.mapper.GoodsMapper;
 import com.ckhun.goods.mapper.ModeMapper;
-import com.ckhun.goods.pojo.Goods;
 import com.ckhun.goods.pojo.GoodsMode;
 import com.ckhun.goods.pojo.Mode;
-import com.ckhun.goods.service.GoodsModeService;
-import com.ckhun.goods.service.GoodsService;
 import com.ckhun.goods.service.ModeService;
 import com.ckhun.utils.ErrorEnum;
 import com.ckhun.utils.R;
@@ -20,15 +16,12 @@ import com.ckhun.utils.TimeUtil;
 import com.ckhun.utils.TrueOrFalseEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.ws.Response;
-import java.sql.Time;
 import java.util.List;
 
 /**
@@ -38,6 +31,7 @@ import java.util.List;
  * @Description
  */
 @RestController
+@RequestMapping("modeApi")
 public class ModeServiceImpl extends ServiceImpl<ModeMapper, Mode> implements ModeService {
 
     @Autowired

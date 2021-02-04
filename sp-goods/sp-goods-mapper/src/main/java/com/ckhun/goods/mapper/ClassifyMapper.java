@@ -1,15 +1,15 @@
 package com.ckhun.goods.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ckhun.goods.pojo.Goods;
+import com.ckhun.goods.pojo.Classify;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * create by one
  *
- * @Date 2021/1/30 16:49
+ * @Date 2021/2/2 13:34
  * @Description
  */
 @Mapper
-public interface GoodsMapper extends BaseMapper<Goods> {
+public interface ClassifyMapper extends BaseMapper<Classify> {
 }

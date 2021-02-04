@@ -1,18 +1,17 @@
 package com.ckhun.goods.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.ckhun.goods.bo.goodsitem.GoodsItemAddListBO;
 import com.ckhun.goods.bo.goodsitem.GoodsItemDeleteBO;
 import com.ckhun.goods.bo.goodsitem.GoodsItemListBO;
 import com.ckhun.goods.bo.goodsitem.GoodsItemUpdateBO;
-import com.ckhun.goods.pojo.Goods;
 import com.ckhun.goods.pojo.GoodsItem;
 import com.ckhun.utils.PageResult;
 import com.ckhun.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * create by one
@@ -36,7 +35,7 @@ public interface GoodsItemService {
      * @param goodsItemUpdateBO
      * @return
      */
-    @PostMapping("update")
+    @PostMapping("updateGoodsItem")
     public R<Boolean> updateGoodsItem(@RequestBody GoodsItemUpdateBO goodsItemUpdateBO);
 
     /**
@@ -55,6 +54,13 @@ public interface GoodsItemService {
     @GetMapping("bySku")
     public R<GoodsItem> itemBySku (@RequestParam("sku") String sku);
 
+    /**
+     * 通过goodsCode获得goodsItem
+     * @param goodsItemListBO
+     * @return
+     */
+
     @PostMapping("byGoodsCode")
     public R<PageResult> itemListByGoodsCode (@RequestBody GoodsItemListBO goodsItemListBO);
+
 }

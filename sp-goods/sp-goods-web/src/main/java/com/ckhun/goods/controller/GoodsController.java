@@ -1,17 +1,20 @@
 package com.ckhun.goods.controller;
 
 import com.ckhun.goods.bo.goods.GoodsAddBO;
+import com.ckhun.goods.bo.goods.GoodsUpdateBO;
 import com.ckhun.goods.dto.goods.GoodsAddDTO;
+import com.ckhun.goods.dto.goods.GoodsListDTO;
+import com.ckhun.goods.dto.goods.GoodsUpdateCountDTO;
+import com.ckhun.goods.dto.goods.GoodsUpdateDTO;
+import com.ckhun.goods.pojo.Goods;
 import com.ckhun.goods.service.GoodsService;
+import com.ckhun.utils.PageResult;
 import com.ckhun.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * create by one
@@ -40,8 +43,33 @@ public class GoodsController {
 
     @PostMapping("update")
     @ApiOperation(value = "更新商品",httpMethod = "POST")
-    public R<Boolean> updateGoods(){
-        return null;
+    public R<Boolean> updateGoods(@RequestBody GoodsUpdateDTO goodsUpdateDTO){
+
+        GoodsUpdateBO goodsUpdateBO = new GoodsUpdateBO();
+        BeanUtils.copyProperties(goodsUpdateDTO,goodsUpdateBO);
+
+        R<Boolean> update = goodsService.update(goodsUpdateBO);
+        return update;
     }
 
+    @GetMapping("getByCode")
+    @ApiOperation(value = "更新商品",httpMethod = "GET")
+    public R<Goods> goodsByCode(@RequestParam("goodsCode") String goodsCode){
+        R<Goods> r = goodsService.goodsByCode(goodsCode);
+        return r;
+    }
+
+    @PostMapping("setGoodsCount")
+    @ApiOperation(value = "更新商品数量",httpMethod = "POST")
+    public R<Boolean> setGoodsCount(@RequestBody GoodsUpdateCountDTO updateCountDTO){
+        R<Boolean> booleanR = goodsService.updateGoodsCount(updateCountDTO);
+        return booleanR;
+    }
+
+    @PostMapping("list")
+    @ApiOperation(value = "分页",httpMethod = "POST")
+    public R<PageResult> listGoods(@RequestBody GoodsListDTO goodsListDTO){
+        R<PageResult> resultR = goodsService.listGoods(goodsListDTO);
+        return resultR;
+    }
 }

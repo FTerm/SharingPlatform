@@ -27,7 +27,7 @@ public interface ModeService {
     @PostMapping("deleteMode")
     public R<Boolean> remove(@RequestBody ModeDeleteBO modeDeleteBO);
 
-    @PostMapping("update")
+    @PostMapping("updateMode")
     public R<Boolean> updateMode(@RequestBody ModeUpdateBO modeUpdateBO);
 
     @GetMapping("byId")
