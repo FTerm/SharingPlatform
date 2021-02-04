@@ -26,6 +26,8 @@ public class OrdersDetails implements Serializable {
     private String orderId;
     @TableField("sku_id")
     private String skuId;
+    @TableField("product_code")
+    private String productCode;
     @TableField("price")
     private Long price;
     @TableField("unit")

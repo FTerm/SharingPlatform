@@ -10,10 +10,30 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sp-orders-api</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.ckhun</groupId>
+            <artifactId>sp-goods-api</artifactId>
+            <version>${version}</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>

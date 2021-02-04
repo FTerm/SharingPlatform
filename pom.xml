@@ -16,11 +16,11 @@
         <module>sp-goods</module>
         <module>sp-test</module>
         <module>sp-orders</module>
-        <module>sp-user</module>
-        <module>sp-user/sp-user-controller</module>
-        <module>sp-user/sp-user-api</module>
-        <module>sp-user/sp-user-mapper</module>
-        <module>sp-user/sp-user-pojo</module>
+<!--        <module>sp-user</module>-->
+<!--        <module>sp-user/sp-user-controller</module>-->
+<!--        <module>sp-user/sp-user-api</module>-->
+<!--        <module>sp-user/sp-user-mapper</module>-->
+<!--        <module>sp-user/sp-user-pojo</module>-->
     </modules>
 
     <name>SharingPlatform</name>

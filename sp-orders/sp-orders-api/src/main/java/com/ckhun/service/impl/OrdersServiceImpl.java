@@ -1,7 +1,12 @@
 package com.ckhun.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ckhun.goods.pojo.Goods;
+import com.ckhun.goods.service.GoodsService;
+import com.ckhun.goods.service.ModeService;
+import com.ckhun.mapper.OrdersDetailsMapper;
 import com.ckhun.mapper.OrdersMapper;
+import com.ckhun.mapper.OrdersStatusMapper;
 import com.ckhun.pojo.dto.OrdersAddDTO;
 import com.ckhun.pojo.dto.OrdersUpdateDTO;
 import com.ckhun.pojo.dto.OrdersUpdateStatusDTO;
@@ -10,10 +15,7 @@ import com.ckhun.pojo.entity.OrdersDetails;
 import com.ckhun.pojo.entity.OrdersStatus;
 import com.ckhun.pojo.vo.OrdersVo;
 import com.ckhun.service.OrdersService;
-import com.ckhun.utils.PageRequest;
-import com.ckhun.utils.PageResult;
-import com.ckhun.utils.TimeUtil;
-import com.ckhun.utils.TrueOrFalseEnum;
+import com.ckhun.utils.*;
 import org.apache.shiro.crypto.hash.Sha1Hash;
 import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.springframework.beans.BeanUtils;
@@ -32,6 +34,17 @@ import java.util.List;
 @Service
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> implements OrdersService {
 
+    @Autowired
+    private OrdersDetailsMapper ordersDetailsMapper;
+
+    @Autowired
+    private OrdersStatusMapper ordersStatusMapper;
+
+    @Autowired
+    private GoodsService goodsService;
+
+    @Autowired
+    private ModeService modeService;
 
     @Override
     @Transactional
@@ -46,23 +59,36 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         orders.setOrderFlag(TrueOrFalseEnum.FALSE_STAUTS.getStatus());
         String randomOrderId = getRandomOrderId(orders.getOrderName());
         String randomTransactionsId = getRandomTransactionsId(orders.getOrderName());
-        Long time = TimeUtil.getCreateTime();
-        orders.setCreateTime(time);
         orders.setTransactionsId(randomTransactionsId);
         // 用商品拿价格
+        R<Goods> goodsR = goodsService.goodsByCode(ordersAddDTO.getProductCode());
+        if (goodsR.getErrCode() == ErrorEnum.SUCCESS.getErrCode()) {
+            Goods data = goodsR.getData();
+            ordersDetails.setUnit(data.getUnit());
+            // 缺商品单价
+        }
 
-        if (ordersAddDTO.getPromotionId() == null) {
+        if (ordersAddDTO.getPromotionId() != null) {
             // 预留有活动优惠的订单信息
         }
 
         ordersStatus.setOrderId(randomOrderId);
         ordersStatus.setOrderStatus(0);
-        ordersStatus.setCreateTime(time);
 
-        boolean save = this.save(orders);
-//        boolean save1 = this.save(ordersDetails);
-        System.out.println(orders);
-        return randomOrderId;
+
+         // TODO 以下代码待修改
+        try {
+            boolean save = this.save(orders);
+            int addOrdersDetails = ordersDetailsMapper.addOrdersDetails(ordersDetails);
+            int addOrdersStatus = ordersStatusMapper.addOrdersStatus(ordersStatus);
+            if (save && addOrdersStatus == 1 && addOrdersDetails == 1) {
+                return randomOrderId;
+            }
+        } catch (Exception exception) {
+            return "0";
+        }
+        return "error";
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.ckhun.pojo.entity;
 
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -58,7 +59,7 @@ public class Orders implements Serializable {
     private Integer orderFlag;
     @TableField("user_id")
     private Long userId;
-    @TableField("create_time")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Long createTime;
 
     @TableField(exist = false)

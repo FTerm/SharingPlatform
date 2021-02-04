@@ -6,4 +6,6 @@ spring:
     nacos:
       discovery:
         server-addr: 120.24.108.55:8848
+        username: ckkhh
+        password: Chen778520
 

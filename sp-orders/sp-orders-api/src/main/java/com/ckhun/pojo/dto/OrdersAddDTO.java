@@ -25,5 +25,7 @@ public class OrdersAddDTO implements Serializable {
 
     private String skuId;
 
+    private String productCode;
+
     private Integer userId;
 }
