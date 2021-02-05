@@ -25,7 +25,7 @@ public interface GoodsItemService {
      * @param goodsItemAddListBO
      * @return
      */
-    @PostMapping("batchAdd")
+    @PostMapping("batchAddGoodsItem")
     public R<Boolean> batchAdd(@RequestBody GoodsItemAddListBO goodsItemAddListBO);
 
     /**
@@ -58,7 +58,7 @@ public interface GoodsItemService {
      * @return
      */
 
-    @PostMapping("byGoodsCode")
+    @PostMapping("getItembyGoodsCode")
     public R<PageResult> itemListByGoodsCode (@RequestBody GoodsItemListBO goodsItemListBO);
 
 }

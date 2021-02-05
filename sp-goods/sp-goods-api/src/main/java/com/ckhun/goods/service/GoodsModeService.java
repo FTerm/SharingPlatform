@@ -20,16 +20,16 @@ import java.util.List;
 @RestController("goodsMode-api")
 public interface GoodsModeService {
 
-    @PostMapping("add")
+    @PostMapping("addGoodsMode")
     public R<Boolean> addGoodsMode(@RequestBody GoodsModeAddBO goodsModeAddBO);
 
     @PostMapping("del")
     public R<Boolean> delGoodsMode(@RequestBody GoodsModeDelBO goodsModeDelBO);
 
-    @PostMapping("update")
+    @PostMapping("updateInfo")
     public R<Boolean> updateGoodsMode(@RequestBody GoodsModeUpdateBO goodsModeUpdateBO);
 
-    @GetMapping("byGoodsCode")
+    @GetMapping("getModeByGoodsCode")
     public R<List<GoodsMode>> getByGoodsCode(@RequestParam("goodsCode") String goodsCode);
 
 

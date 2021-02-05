@@ -23,15 +23,15 @@ import java.util.List;
 @RestController("classify-service")
 public interface ClassifyService {
 
-    @PostMapping("add")
+    @PostMapping("addClassify")
     public R<Boolean> addClassify(@RequestBody ClassifyAddBO classifyAddBO);
 
-    @PostMapping("delete")
+    @PostMapping("deleteClassify")
     public R<Boolean> delClassify(@RequestBody ClassifyDelBO classifyDelBO);
 
-    @PostMapping("update")
+    @PostMapping("updateClassify")
     public R<Boolean> updateClassify(@RequestBody ClassifyUpdateBO classifyUpdateBO);
 
-    @GetMapping("list")
+    @GetMapping("listInfo")
     public R<List<Classify>> listPage();
 }

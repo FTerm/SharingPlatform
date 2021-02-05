@@ -20,7 +20,7 @@ import java.util.List;
 @RestController("mode-api")
 public interface ModeService {
 
-    @PostMapping("add")
+    @PostMapping("addMode")
     public R<Boolean> addMode(@RequestBody ModeAddBO modeAddBO);
 
     @PostMapping("deleteMode")
@@ -32,6 +32,6 @@ public interface ModeService {
     @GetMapping("byId")
     public R<Mode> getModeById(@RequestParam("id") Integer id);
 
-    @GetMapping("list")
+    @GetMapping("listMode")
     public R<List<Mode>> listMode();
 }

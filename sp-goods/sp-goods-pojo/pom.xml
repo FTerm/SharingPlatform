@@ -28,6 +28,7 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
