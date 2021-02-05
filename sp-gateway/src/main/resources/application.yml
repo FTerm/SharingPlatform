@@ -16,19 +16,13 @@ spring:
           enabled: true
 
       routes:
-        - id: test-router
-          uri: lb://sp-test
-          predicates:
-            - Path=/sp-test/**
-          filters:
-          - StripPrefix=1
-
-        - id: orders-router
-          uri: lb://sp-orders
-          predicates:
-            - Path=/sp-orders/**
-          filters:
-            - StripPrefix=1
+#
+#        - id: orders-router
+#          uri: lb://sp-orders
+#          predicates:
+#            - Path=/sp-orders/**
+#          filters:
+#            - StripPrefix=1
 
       globalcors:
         cors-configurations:

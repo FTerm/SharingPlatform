@@ -1,5 +1,6 @@
 package com.ckhun.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ckhun.goods.pojo.Goods;
 import com.ckhun.goods.service.GoodsService;
@@ -21,7 +22,9 @@ import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
@@ -42,9 +45,6 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
     @Autowired
     private GoodsService goodsService;
-
-    @Autowired
-    private ModeService modeService;
 
     @Override
     @Transactional
@@ -76,24 +76,36 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         ordersStatus.setOrderStatus(0);
 
 
-         // TODO 以下代码待修改
         try {
             boolean save = this.save(orders);
             int addOrdersDetails = ordersDetailsMapper.addOrdersDetails(ordersDetails);
             int addOrdersStatus = ordersStatusMapper.addOrdersStatus(ordersStatus);
             if (save && addOrdersStatus == 1 && addOrdersDetails == 1) {
                 return randomOrderId;
+            } else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return "rollback";
             }
         } catch (Exception exception) {
-            return "0";
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return "rollback";
         }
-        return "error";
 
     }
 
     @Override
     public OrdersVo queryById(String orderId) {
-        return null;
+        OrdersVo ordersVo = new OrdersVo();
+        QueryWrapper<Orders> objectQueryWrapper = new QueryWrapper<>();
+        objectQueryWrapper.eq("order_id", orderId);
+        Orders orders = this.getOne(objectQueryWrapper);
+        BeanUtils.copyProperties(orders, ordersVo);
+        OrdersDetails ordersDetails = ordersDetailsMapper.queryDetailsById(orderId);
+        OrdersStatus ordersStatus = ordersStatusMapper.queryOrdersStatusById(orderId);
+        BeanUtils.copyProperties(ordersDetails, ordersVo);
+        BeanUtils.copyProperties(ordersStatus, ordersVo);
+        ordersVo.setStatus(ordersStatus.getOrderStatus());
+        return ordersVo;
     }
 
     @Override

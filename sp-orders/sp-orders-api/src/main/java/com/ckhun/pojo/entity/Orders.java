@@ -33,6 +33,10 @@ public class Orders implements Serializable {
 
     /**
      * 支付类型定义
+     * 0 -> 零钱
+     * 1 -> 微信
+     * 2 -> 支付宝
+     * 3 -> 其他
      */
     @TableField("payment_type")
     private Integer paymentType;

@@ -22,7 +22,11 @@ public class OrdersStatus implements Serializable {
     private String orderId;
     /**
      * orderStatus 详细描述
-     * 0 ->
+     * 0 -> 已删除
+     * 1 ->
+     * 2 ->
+     * 3 ->
+     *
      *
      */
     @TableField("order_status")

@@ -3,8 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper>
+    <sql id="Base_List">
+        order_id, order_status, payment_id, pay_time, close_time, update_time
+    </sql>
+
     <insert id="addOrdersStatus" parameterMap="com.ckhun.pojo.entity.OrdersStatus">
         insert into c_orders_status (order_id, order_status, payment_id, pay_time, close_time, create_time, update_time)
         values (#{orderId}, #{orderStatus}, #{paymentId}, #{payTime}, #{closeTime}, #{createTime}, #{updateTime})
     </insert>
+
+    <select id="queryOrdersStatusById" parameterType="java.lang.String" resultMap="com.ckhun.pojo.entity.OrdersStatus">
+        select
+        <include refid="Base_List" />
+        from c_orders_status
+        where order_id = #{id}
+    </select>
 </mapper>

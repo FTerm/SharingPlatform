@@ -3,8 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper>
+    <sql id="Base_List">
+        id, order_id, sku_id, product_code, price, unit, billing_mode, image, location_id
+    </sql>
+
     <insert id="addOrdersDetails" parameterMap="com.ckhun.pojo.entity.OrdersDetails" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         insert into c_orders_details (order_id, sku_id, price, unit, billing_model, image, location_id)
         values (#{orderId}, #{skuId}, #{price}, #{unit}, #{billingModel}, #{image}, #{locationId})
     </insert>
+
+    <select id="queryDetailsById" parameterType="java.lang.String" resultMap="com.ckhun.pojo.entity.OrdersDetails">
+        select
+        <include refid="Base_List" />
+        from c_orders_details
+        where order_id = #{id}
+    </select>
 </mapper>

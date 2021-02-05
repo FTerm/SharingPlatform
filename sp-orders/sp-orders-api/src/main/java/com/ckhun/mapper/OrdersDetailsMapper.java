@@ -14,4 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface OrdersDetailsMapper extends BaseMapper<OrdersDetailsMapper> {
 
     int addOrdersDetails(OrdersDetails ordersDetails);
+
+    OrdersDetails queryDetailsById(String id);
 }
