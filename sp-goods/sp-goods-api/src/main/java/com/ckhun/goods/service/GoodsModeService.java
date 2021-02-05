@@ -1,12 +1,9 @@
 package com.ckhun.goods.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.ckhun.goods.bo.goodsmode.GoodsModeAddBO;
 import com.ckhun.goods.bo.goodsmode.GoodsModeDelBO;
 import com.ckhun.goods.bo.goodsmode.GoodsModeUpdateBO;
-import com.ckhun.goods.pojo.GoodsItem;
 import com.ckhun.goods.pojo.GoodsMode;
-import com.ckhun.goods.pojo.Mode;
 import com.ckhun.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +17,7 @@ import java.util.List;
  * @Description
  */
 @FeignClient(name = "sp-goods")
+@RestController("goodsMode-api")
 public interface GoodsModeService {
 
     @PostMapping("add")

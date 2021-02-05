@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @Description
  */
 @FeignClient(name = "sp-goods")
+@RestController("goods-api")
 public interface GoodsService {
     /**
      * 新增商品

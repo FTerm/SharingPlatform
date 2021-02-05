@@ -8,10 +8,7 @@ import com.ckhun.goods.pojo.GoodsItem;
 import com.ckhun.utils.PageResult;
 import com.ckhun.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * create by one
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description
  */
 @FeignClient(name = "sp-goods")
+@RestController("goodsItem-api")
 public interface GoodsItemService {
 
     /**
