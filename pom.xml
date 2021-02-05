@@ -9,13 +9,13 @@
     <packaging>pom</packaging>
     <version>0.1.0</version>
     <modules>
-        <module>sp-registry</module>
-        <module>sp-config</module>
+<!--        <module>sp-registry</module>-->
+<!--        <module>sp-config</module>-->
         <module>sp-common</module>
         <module>sp-gateway</module>
         <module>sp-goods</module>
-        <module>sp-test</module>
         <module>sp-orders</module>
+<!--        <module>sp-test</module>-->
 <!--        <module>sp-user</module>-->
 <!--        <module>sp-user/sp-user-controller</module>-->
 <!--        <module>sp-user/sp-user-api</module>-->
