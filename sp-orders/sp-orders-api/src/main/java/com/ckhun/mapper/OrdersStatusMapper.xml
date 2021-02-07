@@ -18,4 +18,13 @@
         from c_orders_status
         where order_id = #{id}
     </select>
+
+    <update id="updateOrdersStatus" parameterType="com.ckhun.pojo.entity.OrdersStatus">
+        update c_orders_status
+        <trim prefix="set" suffixOverrides=",">
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="closeTime != null">close_time = #{closeTime},</if>
+        </trim>
+        where order_id = #{id}
+    </update>
 </mapper>

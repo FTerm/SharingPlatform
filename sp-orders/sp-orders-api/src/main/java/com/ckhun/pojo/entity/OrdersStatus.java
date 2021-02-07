@@ -23,10 +23,11 @@ public class OrdersStatus implements Serializable {
     /**
      * orderStatus 详细描述
      * 0 -> 已删除
-     * 1 ->
-     * 2 ->
-     * 3 ->
-     *
+     * 1 -> 已关闭
+     * 2 -> 待支付
+     * 3 -> 已支付
+     * 4 -> 已完成
+     * 5 ->
      *
      */
     @TableField("order_status")

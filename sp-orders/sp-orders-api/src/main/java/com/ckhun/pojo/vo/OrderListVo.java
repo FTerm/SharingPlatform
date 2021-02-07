@@ -1,27 +1,23 @@
 package com.ckhun.pojo.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.ckhun.pojo.entity.OrdersDetails;
 import com.ckhun.pojo.entity.OrdersStatus;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author : Kunhong Chan
- * @date : Created in 20:39 2021/1/31
+ * @date : Created in 17:38 2021/2/7
  * @description :
  * @since : 1.0.0
  */
-
 @Data
-@ApiModel("订单VO")
-public class OrdersVo implements Serializable {
+@ApiModel("获取订单列表或者单条记录的VO")
+public class OrderListVo implements Serializable {
 
-    private static final long serialVersionUID = 11L;
+    private static final long SerialVersionUID = 18L;
 
     private String orderId;
 
@@ -47,7 +43,21 @@ public class OrdersVo implements Serializable {
 
     private Long createTime;
 
-    private OrdersDetails ordersDetails;
+    private String billingModel;
 
-    private OrdersStatus status;
+    private String image;
+
+    private String skuId;
+
+    private String productCode;
+
+    private Integer orderStatus;
+
+    private String paymentId;
+
+    private Long payTime;
+
+    private Long closeTime;
+
+    private Long updateTime;
 }

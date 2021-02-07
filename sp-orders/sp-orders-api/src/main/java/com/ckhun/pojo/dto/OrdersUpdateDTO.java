@@ -10,6 +10,7 @@ import java.io.Serializable;
  * @description :
  * @since : 1.0.0
  */
+@Deprecated
 @Data
 public class OrdersUpdateDTO implements Serializable {
 }

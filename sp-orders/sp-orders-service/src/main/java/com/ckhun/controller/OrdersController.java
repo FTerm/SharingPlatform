@@ -1,6 +1,8 @@
 package com.ckhun.controller;
 
 import com.ckhun.service.OrdersService;
+import com.ckhun.utils.PageRequest;
+import com.ckhun.utils.PageResult;
 import com.ckhun.utils.R;
 import com.ckhun.pojo.dto.OrdersAddDTO;
 import io.swagger.annotations.*;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * 3. 更新订单状态
  *
  */
+// TODO 控制器编写
 @Api(tags = "订单服务接口")
 @RestController
 @RequestMapping("/orders")
@@ -28,8 +31,13 @@ public class OrdersController {
 
     @PostMapping("add")
     @ApiOperation(value = "创建订单信息", httpMethod = "POST", notes = "创建订单")
-    public R<String> createOrders(@RequestBody OrdersAddDTO ordersAddDTO) {
-        ordersService.createOrder(ordersAddDTO);
-        return null;
+    public R<?> createOrders(@RequestBody OrdersAddDTO ordersAddDTO) {
+
+        return ordersService.createOrder(ordersAddDTO);
+    }
+
+    @PostMapping("findPage")
+    public PageResult findOrders(@RequestBody PageRequest pageRequest) {
+        return ordersService.selectOrderByPage(pageRequest);
     }
 }

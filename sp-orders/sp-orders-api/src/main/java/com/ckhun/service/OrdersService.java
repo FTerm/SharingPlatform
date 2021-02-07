@@ -2,11 +2,14 @@ package com.ckhun.service;
 
 
 import com.ckhun.pojo.dto.OrdersAddDTO;
+import com.ckhun.pojo.dto.OrdersCloseDTO;
 import com.ckhun.pojo.dto.OrdersUpdateDTO;
 import com.ckhun.pojo.dto.OrdersUpdateStatusDTO;
+import com.ckhun.pojo.vo.OrderListVo;
 import com.ckhun.pojo.vo.OrdersVo;
 import com.ckhun.utils.PageRequest;
 import com.ckhun.utils.PageResult;
+import com.ckhun.utils.R;
 
 import java.util.List;
 
@@ -23,7 +26,7 @@ public interface OrdersService {
      * @param ordersAddDTO
      * @return
      */
-    String createOrder(OrdersAddDTO ordersAddDTO);
+    R<?> createOrder(OrdersAddDTO ordersAddDTO);
 
     /**
      * 通过order id查询订单信息
@@ -37,13 +40,14 @@ public interface OrdersService {
      * @param ordersUpdateDTO
      * @return
      */
+    @Deprecated
     Boolean updateOrder(OrdersUpdateDTO ordersUpdateDTO);
 
     /**
      * 获取全部订单信息
      * @return
      */
-    List<OrdersVo> getAllOrder();
+    List<OrderListVo> getAllOrder();
 
     /**
      * 分页查询
@@ -53,17 +57,34 @@ public interface OrdersService {
     PageResult selectOrderByPage(PageRequest pageRequest);
 
     /**
+     * 用户关闭订单
+     * @param ordersCloseDTO
+     * @return
+     */
+    @Deprecated
+    Boolean closeOrder(OrdersCloseDTO ordersCloseDTO);
+
+    /**
      * 更新订单状态
      * @param ordersUpdateStatusDTO
      * @return
      */
-    Boolean updateOrderStatus(OrdersUpdateStatusDTO ordersUpdateStatusDTO);
+    R<?> updateOrderStatus(OrdersUpdateStatusDTO ordersUpdateStatusDTO);
+
+    /**
+     * 用户删除订单
+     * @param orderId
+     * @param userId
+     * @return
+     */
+    R<?> delOrderByUser(String orderId, Integer userId);
+
 
     /**
      * 根据user_id查询用户全部订单
      * @param userId
      * @return
      */
-    List<OrdersVo> getOrderByUser(String userId);
+    List<OrderListVo> getOrderByUser(Integer userId);
 
 }
