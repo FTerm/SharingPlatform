@@ -121,12 +121,13 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
     @Deprecated
     @Override
-    public Boolean updateOrder(OrdersUpdateDTO ordersUpdateDTO) {
+    public Boolean updateOrder() {
         return null;
     }
 
     @Override
     public List<OrderListVo> getAllOrder() {
+        System.out.println("Test");
         return this.baseMapper.getOrdersList();
     }
 
@@ -173,6 +174,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     public R<?> updateOrderStatus(OrdersUpdateStatusDTO ordersUpdateStatusDTO) {
 
         // TODO 参数验证
+        // TODO userID 检验
         OrdersStatus ordersStatus = new OrdersStatus();
         StateHandler stateHandler = new StateHandler();
         BeanUtils.copyProperties(ordersUpdateStatusDTO, ordersStatus);

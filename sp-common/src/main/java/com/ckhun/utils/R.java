@@ -46,6 +46,12 @@ public class R<T> implements Serializable {
         this.data = data;
     }
 
+    public R(Integer errCode, String errMsg) {
+        super();
+        this.errMsg = errMsg;
+        this.errCode = errCode;
+    }
+
     public R(Throwable e) {
         super();
         this.errMsg = e.getMessage();
@@ -61,6 +67,16 @@ public class R<T> implements Serializable {
         R<T> results = new R<>();
         results.setErrCode(resultEnum.getErrCode());
         results.setErrMsg(resultEnum.getErrMsg());
+        results.setSuccess(false);
+        results.setData(data);
+        results.setTs(this.ts);
+        return results;
+    }
+
+    public R<?> fail(Integer errCode, String errMsg) {
+        R<T> results = new R<>();
+        results.setErrCode(errCode);
+        results.setErrMsg(errMsg);
         results.setSuccess(false);
         results.setData(data);
         results.setTs(this.ts);

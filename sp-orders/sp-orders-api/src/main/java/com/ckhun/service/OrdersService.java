@@ -37,11 +37,11 @@ public interface OrdersService {
 
     /**
      * 更新订单信息
-     * @param ordersUpdateDTO
+     * @param
      * @return
      */
     @Deprecated
-    Boolean updateOrder(OrdersUpdateDTO ordersUpdateDTO);
+    Boolean updateOrder();
 
     /**
      * 获取全部订单信息
