@@ -1,4 +1,4 @@
-package SPuser.sp_user_pojo;
+package com.ckhun.SPuser.sp_user_pojo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

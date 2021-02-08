@@ -1,7 +1,7 @@
-package SPuser.sp_user_api;
+package com.ckhun.SPuser.sp_user_api;
 
+import com.ckhun.SPuser.sp_user_pojo.UserInfo;
 import com.ckhun.utils.R;
-import SPuser.sp_user_pojo.UserInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
