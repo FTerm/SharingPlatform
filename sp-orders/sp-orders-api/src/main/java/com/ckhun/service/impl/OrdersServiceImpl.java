@@ -127,7 +127,6 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
     @Override
     public List<OrderListVo> getAllOrder() {
-        System.out.println("Test");
         return this.baseMapper.getOrdersList();
     }
 
