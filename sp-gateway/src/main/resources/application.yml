@@ -31,3 +31,13 @@ spring:
             allowedMethods: "*"
   application:
     name: sp-gateway
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://api.ckhun.co:3306/sharing_platform?characterEncoding=utf-8
+    username: ckkhh
+    password: Chen778520
+    hikari:
+      connection-timeout: 30000
+      read-only: false
+      maximum-pool-size: 60
+      minimum-idle: 10

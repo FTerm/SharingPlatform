@@ -96,6 +96,8 @@
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-config-ogdl:1.4.1" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-event:1.4.1" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.20" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.11.4" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2.2.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba.nacos:nacos-client:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba.nacos:nacos-common:1.2.1" level="project" />
