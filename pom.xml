@@ -11,6 +11,7 @@
     <modules>
 <!--        <module>sp-registry</module>-->
 <!--        <module>sp-config</module>-->
+        <module>sp-admin</module>
         <module>sp-common</module>
         <module>sp-gateway</module>
         <module>sp-goods</module>
