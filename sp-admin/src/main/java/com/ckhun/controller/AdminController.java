@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @since : 1.0.0
 
  */
-@Api("管理员模块")
+@Api(tags = "管理员模块")
 @RestController
 @RequestMapping("admin")
 @ResponseBody
