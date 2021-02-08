@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 class UserServiceImpl implements UserService {
 
     @Autowired
-    UserMapper mapper;
+    static UserMapper mapper;
 
     @Override
     public UserInfo selectUser(int id) {
@@ -25,7 +25,7 @@ class UserServiceImpl implements UserService {
         return mapper.selectUserAll();
     }
 
-    public UserInfo selectUserById(int username){return mapper.selectUserById(username);}
+    public UserInfo selectUserById(int id){return mapper.selectUserById(id);}
 
     public R<UserInfo> insertUser(String username, String password,String email){
         return mapper.insertUser(username, password, email);

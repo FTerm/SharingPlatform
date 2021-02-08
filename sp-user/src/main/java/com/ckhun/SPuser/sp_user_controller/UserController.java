@@ -1,4 +1,4 @@
-package com.ckhun.sp_user.sp_user_controller;
+package com.ckhun.SPuser.sp_user_controller;
 
 import com.ckhun.SPuser.service.UserService;
 

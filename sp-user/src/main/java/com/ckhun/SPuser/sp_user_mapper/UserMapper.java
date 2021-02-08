@@ -26,18 +26,20 @@ public interface UserMapper extends BaseMapper<UserInfo> {
     UserInfo selectUser(int id);
 
 
-    /*******根据username查询符合用户********/
+    /*******根据username查询符合用户
+     * @param username********/
     @Select("SELECT * FROM test_login WHERE username=#{userName}")
-    UserInfo selectUserById(String username);
+    UserInfo selectUserById(int username);
 
     /*******添加新用户********/
     @Insert("insert into c_user(username,password,phone) values (#{name},#{password},#{phone})")
     R<UserInfo> insertUser(String username, String password,String email);
 
 
-    /*******修改已有用户信息********/
+    /*******修改已有用户信息
+     * @param id********/
     @Update("update c_user set username=#{username},password=#{password},age=#{age},birth=#{birth},phone=#{phone} where id=#{id}")
-    R<UserInfo> updateUser(UserInfo id);
+    R<UserInfo> updateUser(int id);
 
     @Update("update c_user set password=#{password} where id=#{id}")
     R<UserInfo> updateUserPassword(Integer id);
