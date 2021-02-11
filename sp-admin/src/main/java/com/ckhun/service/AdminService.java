@@ -27,7 +27,7 @@ public interface AdminService {
 
     PageResult selectAdminByPage(PageRequest pageRequest);
 
-    R<AdminProfileVo> profileAdmin(AdminLoginDTO adminLoginDTO);
+    R<?> profileAdmin(AdminLoginDTO adminLoginDTO);
 
 
 }

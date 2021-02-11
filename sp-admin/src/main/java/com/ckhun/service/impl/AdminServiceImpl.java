@@ -39,6 +39,13 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         adminAddDTO.setPassword(hash_password);
         BeanUtils.copyProperties(adminAddDTO, admin);
         admin.setStatus(TrueOrFalseEnum.FALSE_STAUTS.getStatus());
+        QueryWrapper<Admin> queryWrapper = new QueryWrapper<Admin>()
+                .eq("status", TrueOrFalseEnum.FALSE_STAUTS.getStatus())
+                .eq("user_name", adminAddDTO.getUserName());
+        Admin queryAdmin = this.getOne(queryWrapper);
+        if (queryAdmin != null) {
+            return new R<>().fail(ErrorEnum.FAIL, null);
+        }
         boolean save = this.save(admin);
         if (save) {
             return new R<>(adminAddDTO.getUserName() + " "+ ErrorEnum.CREATE_SUCCESS.getErrMsg());
@@ -63,7 +70,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                 .eq("status", TrueOrFalseEnum.FALSE_STAUTS.getStatus())
                 .eq("user_name", adminLoginDTO.getUserName());
         Admin admin = this.getOne(queryWrapper);
-        AssertException.isNotNull(admin,ErrorEnum.FAIL.getErrCode(),"管理员不存在");
+        if (admin == null) {
+            return new R<>().fail(ErrorEnum.FAIL, null);
+        }
+//        AssertException.isNotNull(admin,ErrorEnum.FAIL.getErrCode(),"管理员不存在");
         boolean equals = admin.getPassword().equals(encryptPassword);
         if (equals) {
             return new R<>(ErrorEnum.LOGIN_SUCCESS.getErrMsg());
@@ -79,7 +89,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         objectQueryWrapper.eq("status", TrueOrFalseEnum.FALSE_STAUTS.getStatus());
         objectQueryWrapper.eq("id", id);
         Admin admin = this.getOne(objectQueryWrapper);
-        AssertException.isNotNull(admin,ErrorEnum.FAIL.getErrCode(),"管理员不存在");
+        if (admin == null) {
+            return new R<>().fail(ErrorEnum.FAIL, null);
+        }
+//        AssertException.isNotNull(admin,ErrorEnum.FAIL.getErrCode(),"管理员不存在");
         UpdateWrapper<Admin> updateWrapper = new UpdateWrapper<Admin>()
                 .eq("id", id)
                 .set("status", TrueOrFalseEnum.TRUE_STAUTS.getStatus());
@@ -97,13 +110,16 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
-    public R<AdminProfileVo> profileAdmin(AdminLoginDTO adminLoginDTO) {
+    public R<?> profileAdmin(AdminLoginDTO adminLoginDTO) {
         AdminProfileVo adminProfileVo = new AdminProfileVo();
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<Admin>()
                 .eq("user_name", adminLoginDTO.getUserName())
                 .eq("status", TrueOrFalseEnum.FALSE_STAUTS.getStatus());
         Admin admin = this.getOne(queryWrapper);
-        AssertException.isNotNull(admin,ErrorEnum.FAIL.getErrCode(),"管理员不存在");
+        if (admin == null) {
+            return new R<>().fail(ErrorEnum.FAIL, null);
+        }
+//        AssertException.isNotNull(admin,ErrorEnum.FAIL.getErrCode(),"管理员不存在");
         BeanUtils.copyProperties(admin, adminProfileVo);
         return new R<>(ErrorEnum.SUCCESS.getErrMsg(), adminProfileVo);
     }
