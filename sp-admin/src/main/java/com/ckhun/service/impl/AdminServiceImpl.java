@@ -125,7 +125,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     private String getRandomPassword(String s) {
-        return new Sha512Hash(System.currentTimeMillis() + ""+ s).toString();
+        return new Sha512Hash("sha512Encode" + s).toString();
     }
 
     private PageInfo<AdminProfileVo> getPageInfo(PageRequest pageRequest) {
