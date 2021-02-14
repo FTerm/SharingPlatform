@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * @author : Kunhong Chan
  * @date : Created in 12:21 2021/2/8
@@ -50,7 +52,8 @@ public class AdminController {
     @DeleteMapping("del")
     @ApiOperation(value = "删除管理员", httpMethod = "DELETE")
     @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "int")
-    public R<?> delAdmin(@RequestBody Integer id) {
+    public R<?> delAdmin(@RequestBody Map<String, Integer> map) {
+        int id = map.get("id") == null ? 0 : map.get("id");
         return adminService.delAdmin(id);
     }
 
