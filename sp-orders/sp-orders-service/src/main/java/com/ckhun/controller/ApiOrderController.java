@@ -45,6 +45,7 @@ public class ApiOrderController {
     }
 
     @PostMapping("getOrder")
+    @ApiOperation(value = "获取用户订单", httpMethod = "POST")
     @ApiImplicitParam(name = "orderId", value = "orderId", required = true, dataType = "String")
     public R<?> getOrder(@RequestBody String orderId) {
         OrdersVo ordersVo = ordersService.queryById(orderId);

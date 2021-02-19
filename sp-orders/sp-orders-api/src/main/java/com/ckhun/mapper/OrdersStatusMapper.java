@@ -1,7 +1,6 @@
 package com.ckhun.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ckhun.pojo.dto.OrdersUpdateStatusDTO;
 import com.ckhun.pojo.entity.OrdersStatus;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since : 1.0.0
  */
 @Mapper
-public interface OrdersStatusMapper extends BaseMapper<OrdersStatusMapper> {
+public interface OrdersStatusMapper extends BaseMapper<OrdersStatus> {
 
     int addOrdersStatus(OrdersStatus ordersStatus);
 

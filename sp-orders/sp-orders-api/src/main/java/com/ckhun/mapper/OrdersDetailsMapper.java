@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since : 1.0.0
  */
 @Mapper
-public interface OrdersDetailsMapper extends BaseMapper<OrdersDetailsMapper> {
+public interface OrdersDetailsMapper extends BaseMapper<OrdersDetails> {
 
     int addOrdersDetails(OrdersDetails ordersDetails);
 
