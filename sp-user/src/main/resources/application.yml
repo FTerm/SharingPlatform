@@ -1,9 +1,9 @@
 server:
-  port: 8084
+  port: 8064
 
 spring:
   application:
-    name: sp-user-controller
+    name: sp-user
 
   cloud:
     nacos:
