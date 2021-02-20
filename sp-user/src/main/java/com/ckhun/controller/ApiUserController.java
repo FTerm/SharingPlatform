@@ -26,7 +26,7 @@ public class ApiUserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("add")
+    @PostMapping("signup")
     @ApiOperation(value = "注册用户", httpMethod = "POST")
     public R<?> createUser(@RequestBody UserAddDTO userAddDTO) {
         return userService.userAdd(userAddDTO);
