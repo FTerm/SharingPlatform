@@ -34,7 +34,6 @@ import java.util.List;
  * @Description
  */
 @RestController
-@RequestMapping("goodsItemApi")
 public class GoodsItemServiceImpl extends ServiceImpl<GoodsItemMapper, GoodsItem> implements GoodsItemService {
 
     @Autowired

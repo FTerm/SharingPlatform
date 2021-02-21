@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/mode")
-@Api("模式相关api")
+@Api(tags = "模式相关api")
 public class ModeController {
 
     @Autowired

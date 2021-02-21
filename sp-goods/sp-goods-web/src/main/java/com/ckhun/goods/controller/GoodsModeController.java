@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/goodsMode")
-@Api("商品模式相关api")
+@Api(tags = "商品模式相关api")
 public class GoodsModeController {
 
     @Autowired

@@ -22,13 +22,14 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/goodsItem")
-@Api("商品项相关api")
+@Api(tags = "商品项相关api")
 public class GoodsItemController {
 
     @Autowired
     private GoodsItemService goodsItemService;
 
     @PostMapping("batchAdd")
+    @ApiOperation(value = "批量新增商品项",httpMethod = "POST")
     public R<Boolean> batchAdd(@RequestBody GoodsItemAddListDTO goodsItemAddListDTO) {
 
         GoodsItemAddListBO goodsItemAddListBO = new GoodsItemAddListBO();
@@ -40,12 +41,14 @@ public class GoodsItemController {
     }
 
     @PostMapping("updateGoodsItem")
+    @ApiOperation(value = "更新商品项",httpMethod = "POST")
     public R<Boolean> updateGoodsItem(@RequestBody GoodsItemUpdateDTO goodsItemUpdateDTO){
         R<Boolean> booleanR = goodsItemService.updateGoodsItem(goodsItemUpdateDTO);
         return booleanR;
     }
 
     @PostMapping("delGoodsItem")
+    @ApiOperation(value = "删除商品项",httpMethod = "POST")
     public R<Boolean> remove(@RequestBody GoodsItemDeleteDTO goodsItemDeleteDTO){
         R<Boolean> remove = goodsItemService.remove(goodsItemDeleteDTO);
         return remove;

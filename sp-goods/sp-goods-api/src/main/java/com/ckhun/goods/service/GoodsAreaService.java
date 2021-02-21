@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  */
 @FeignClient(name = "sp-goods")
-@RestController("goods-area-service")
+@RestController("goods-area-api")
 public interface GoodsAreaService {
 
     @PostMapping("singleArea")

@@ -32,7 +32,6 @@ import java.util.List;
  * @Description
  */
 @RestController
-@RequestMapping("modeApi")
 public class ModeServiceImpl extends ServiceImpl<ModeMapper, Mode> implements ModeService {
 
     @Autowired

@@ -32,7 +32,6 @@ import java.util.List;
  * @Description
  */
 @RestController
-@RequestMapping("classifyApi")
 public class ClassifyServiceImpl extends ServiceImpl<ClassifyMapper, Classify> implements ClassifyService {
 
     @Autowired

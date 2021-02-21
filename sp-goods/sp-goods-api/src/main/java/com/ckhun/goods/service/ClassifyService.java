@@ -20,7 +20,7 @@ import java.util.List;
  * @Description
  */
 @FeignClient(name = "sp-goods")
-@RestController("classify-service")
+@RestController("classify-api")
 public interface ClassifyService {
 
     @PostMapping("addClassify")

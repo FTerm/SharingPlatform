@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/goods")
-@Api("商品相关api")
+@Api(tags = "商品相关api")
 public class GoodsController {
 
     @Autowired

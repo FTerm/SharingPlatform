@@ -11,7 +11,6 @@ import com.ckhun.utils.ErrorEnum;
 import com.ckhun.utils.R;
 import org.springframework.data.geo.GeoResults;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  */
 @RestController
-@RequestMapping("goodsAreaApi")
 public class GoodsAreaServiceImpl extends ServiceImpl<GoodsAreaMapper, GoodsArea> implements GoodsAreaService {
 
     private final static String KEY_NAME = "AREA_";
