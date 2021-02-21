@@ -22,4 +22,6 @@ public interface GoodsAreaService {
 
     @PostMapping("listInfoByPlace")
     public R listInfo(@RequestBody GoodsAreaItemListByPlaceDTO goodsAreaItemListByPlaceDTO);
+
+
 }

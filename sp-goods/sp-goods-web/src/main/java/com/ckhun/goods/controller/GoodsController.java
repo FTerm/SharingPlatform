@@ -52,7 +52,7 @@ public class GoodsController {
     }
 
     @GetMapping("getByCode")
-    @ApiOperation(value = "更新商品",httpMethod = "GET")
+    @ApiOperation(value = "根据code获取商品",httpMethod = "GET")
     public R<Goods> goodsByCode(@RequestParam("goodsCode") String goodsCode){
         R<Goods> r = goodsService.goodsByCode(goodsCode);
         return r;

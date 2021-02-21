@@ -41,7 +41,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         AssertException.isNotBlank(goodsAddBO.getUnit(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品单位为空");
         AssertException.isNotNull(goodsAddBO.getType(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品类型为空");
         AssertException.isNotBlank(goodsAddBO.getVendorCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"所属商家编码为空");
-        AssertException.isNotBlank(goodsAddBO.getBrandCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"所属品牌编码为空");
 
         R<String> result = new R<>();
         //TODO 验证商家是否存在
@@ -59,8 +58,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         goods.setCreateTime(time);
         goods.setUpdateTime(time);
         goods.setStatus(StatusConsts.WAIT_STATUS);  //新增
-        goods.setBrandCode(goodsAddBO.getBrandCode());
-
 
         boolean save = this.save(goods);
         AssertException.isTrue(save,ErrorEnum.CREATE_EOR.getErrCode(),ErrorEnum.CREATE_EOR.getErrMsg());
@@ -84,6 +81,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         if (StringUtils.isNotBlank(goodsUpdateBO.getVendorCode())){
             // TODO 验证商家
         }
+
+        //TODO 状态更新验参
 
         Goods goods = new Goods();
         BeanUtils.copyProperties(goodsUpdateBO,goods);

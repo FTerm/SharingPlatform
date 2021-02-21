@@ -51,8 +51,4 @@ public class GoodsAreaServiceImpl extends ServiceImpl<GoodsAreaMapper, GoodsArea
         }
         return null;
     }
-
-
-
-
 }
