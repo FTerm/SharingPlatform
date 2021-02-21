@@ -33,7 +33,7 @@ public class User implements Serializable {
     private String email;
 
     @TableField("phone")
-    private Integer phone;
+    private String phone;
 
     @TableField("status")
     private Integer status;   // 1 / 0
