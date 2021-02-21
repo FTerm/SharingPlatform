@@ -45,6 +45,10 @@ public class GoodsMode implements Serializable {
     @ApiModelProperty("状态")
     private Integer status;
 
+    @TableField("unit")
+    @ApiModelProperty("单位")
+    private String unit;
+
     @TableField("create_time")
     @ApiModelProperty("创建时间")
     private Long createTime;

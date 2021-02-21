@@ -29,9 +29,10 @@ public interface ModeService {
     @PostMapping("updateMode")
     public R<Boolean> updateMode(@RequestBody ModeUpdateBO modeUpdateBO);
 
-    @GetMapping("byId")
+    @GetMapping("getByModeId")
     public R<Mode> getModeById(@RequestParam("id") Integer id);
 
     @GetMapping("listMode")
     public R<List<Mode>> listMode();
+
 }

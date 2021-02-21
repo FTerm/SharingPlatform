@@ -40,10 +40,6 @@ public class GoodsItem implements Serializable {
     @ApiModelProperty("纬度")
     private Long latitude;
 
-    @TableField("scope")
-    @ApiModelProperty("范围")
-    private String scope;
-
     @TableField("create_time")
     @ApiModelProperty("创建时间")
     private Long createTime;

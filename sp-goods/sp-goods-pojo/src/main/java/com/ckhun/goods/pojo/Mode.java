@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * create by one
@@ -34,6 +35,9 @@ public class Mode implements Serializable {
     @ApiModelProperty("模式描述")
     private String description;
 
+    @TableField("platform_percentage")
+    @ApiModelProperty("平台收益百分比")
+    private BigDecimal platformPercentage;
 
     @TableField("target")
     @ApiModelProperty("状态")
@@ -50,4 +54,5 @@ public class Mode implements Serializable {
     @TableField("update_time")
     @ApiModelProperty("更新时间")
     private Long updateTime;
+
 }

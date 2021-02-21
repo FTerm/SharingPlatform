@@ -31,4 +31,7 @@ public class GoodsUpdateBO {
 
     @ApiModelProperty("所属商家")
     private String vendorCode;
+
+    @ApiModelProperty("所属品牌")
+    private String brandCode;
 }

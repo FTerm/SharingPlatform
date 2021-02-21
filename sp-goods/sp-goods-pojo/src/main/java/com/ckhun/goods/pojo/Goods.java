@@ -38,10 +38,6 @@ public class Goods implements Serializable {
     @ApiModelProperty("商品状态")
     private Integer status;
 
-    @TableField("count")
-    @ApiModelProperty("商品总数量")
-    private Integer count;
-
     @TableField("item_count")
     @ApiModelProperty("商品项数量")
     private Integer itemCount;
@@ -69,5 +65,9 @@ public class Goods implements Serializable {
     @TableField("del_flag")
     @ApiModelProperty("是否逻辑删除")
     private Integer delFlag;
+
+    @TableField("brand_code")
+    @ApiModelProperty("品牌")
+    private String brandCode;
 
 }

@@ -3,7 +3,6 @@ package com.ckhun.goods.service;
 import com.ckhun.goods.bo.goods.GoodsAddBO;
 import com.ckhun.goods.bo.goods.GoodsListBO;
 import com.ckhun.goods.bo.goods.GoodsUpdateBO;
-import com.ckhun.goods.bo.goods.GoodsUpdateCountBO;
 import com.ckhun.goods.pojo.Goods;
 import com.ckhun.utils.PageResult;
 import com.ckhun.utils.R;
@@ -44,13 +43,6 @@ public interface GoodsService {
     @GetMapping("byGoodsCode")
     public R<Goods> goodsByCode(@RequestParam("goodsCode") String goodsCode);
 
-    /**
-     * 更新总数量
-     * @param updateCountBO
-     * @return
-     */
-    @PostMapping("updateCount")
-    public R<Boolean> updateGoodsCount(@RequestBody GoodsUpdateCountBO updateCountBO);
 
     @PostMapping("listPage")
     public R<PageResult> listGoods(@RequestBody GoodsListBO goodsListBO);

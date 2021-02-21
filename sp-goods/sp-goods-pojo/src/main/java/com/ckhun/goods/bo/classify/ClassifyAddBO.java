@@ -23,7 +23,4 @@ public class ClassifyAddBO {
     @ApiModelProperty("1-一级分类，2-二级分类(需要写pid)")
     private Integer type;
 
-    @ApiModelProperty("status")
-    private Integer status;
-
 }

@@ -51,7 +51,6 @@ public class GoodsItemServiceImpl extends ServiceImpl<GoodsItemMapper, GoodsItem
 
         Goods goods = goodsService.getOne(goodsQueryWrapper);
         AssertException.isNotNull(goods, ErrorEnum.VALIDATION_EOR.getErrCode(), "商品不存在");
-        AssertException.isTrue(goods.getCount() >= (goods.getItemCount() + goodsItemAddListBO.getGoodsItemAddBOList().size()), ErrorEnum.FAIL.getErrCode(), "商品项数量大于总数量");
 
         List<GoodsItemAddBO> goodsItemAddBOList = goodsItemAddListBO.getGoodsItemAddBOList();
         int size = goodsItemAddBOList.size();
@@ -61,17 +60,18 @@ public class GoodsItemServiceImpl extends ServiceImpl<GoodsItemMapper, GoodsItem
         UpdateWrapper<Goods> updateWrapper = new UpdateWrapper<Goods>()
                 .eq("goods_code", goodsItemAddListBO.getGoodsCode())
                 .eq("itemCount", goods.getItemCount())   //乐观锁
-                .ge("count", goods.getItemCount() + size)
-                .set("itemCount", goods.getItemCount() + size);
+                .set("itemCount", goods.getItemCount() + size)
+                .set("updateTime",TimeUtil.getCreateTime());
 
         boolean update = goodsService.update(updateWrapper);
-        AssertException.isTrue(update, ErrorEnum.FAIL.getErrCode(), "更新商品数量失败");
+        AssertException.isTrue(update, ErrorEnum.FAIL.getErrCode(), "更新商品项数量失败");
 
         List<GoodsItem> goodsItems = new ArrayList<>();
         Long time = TimeUtil.getCreateTime();
         if (!CollectionUtils.isEmpty(goodsItemAddBOList)) {
             goodsItemAddBOList.stream().forEach((item) -> {
                 GoodsItem goodsItem = new GoodsItem();
+                AssertException.isNotBlank(item.getSku(),ErrorEnum.VALIDATION_EOR.getErrCode(),"存在商品项sku为空");
                 BeanUtils.copyProperties(item, goodsItem);
                 goodsItem.setGoodsCode(goodsItemAddListBO.getGoodsCode());
                 goodsItem.setCreateTime(time);

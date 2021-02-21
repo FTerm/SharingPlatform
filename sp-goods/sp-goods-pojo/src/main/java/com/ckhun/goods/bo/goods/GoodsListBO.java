@@ -18,7 +18,7 @@ public class GoodsListBO extends PageRequest {
     @ApiModelProperty("商品名-模糊查询")
     private String name;
 
-    @ApiModelProperty("商品状态")
+    @ApiModelProperty("商品状态-筛选条件")
     private Integer stauts;
 
     @ApiModelProperty("商品类型")
@@ -28,7 +28,7 @@ public class GoodsListBO extends PageRequest {
     private String vendorCode;
 
     @ApiModelProperty("开始时间")
-    private Long createTime;
+    private Long startTime;
 
     @ApiModelProperty("结束时间")
     private Long endTime;

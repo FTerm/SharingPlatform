@@ -8,7 +8,7 @@ import com.ckhun.common.AssertException;
 import com.ckhun.goods.bo.goods.GoodsAddBO;
 import com.ckhun.goods.bo.goods.GoodsListBO;
 import com.ckhun.goods.bo.goods.GoodsUpdateBO;
-import com.ckhun.goods.bo.goods.GoodsUpdateCountBO;
+import com.ckhun.goods.consts.StatusConsts;
 import com.ckhun.goods.mapper.GoodsMapper;
 import com.ckhun.goods.pojo.Goods;
 import com.ckhun.goods.service.GoodsService;
@@ -38,10 +38,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         //验参
         AssertException.isNotBlank(goodsAddBO.getName(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品名称为空");
         AssertException.isNotNull(goodsAddBO.getStauts(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品状态为空");
-        AssertException.isNotNull(goodsAddBO.getCount(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品数量为空");
         AssertException.isNotBlank(goodsAddBO.getUnit(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品单位为空");
         AssertException.isNotNull(goodsAddBO.getType(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品类型为空");
         AssertException.isNotBlank(goodsAddBO.getVendorCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"所属商家编码为空");
+        AssertException.isNotBlank(goodsAddBO.getBrandCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"所属品牌编码为空");
 
         R<String> result = new R<>();
         //TODO 验证商家是否存在
@@ -58,6 +58,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         goods.setItemCount(0);  //商品项数量初始为0
         goods.setCreateTime(time);
         goods.setUpdateTime(time);
+        goods.setStatus(StatusConsts.WAIT_STATUS);  //新增
+        goods.setBrandCode(goodsAddBO.getBrandCode());
+
 
         boolean save = this.save(goods);
         AssertException.isTrue(save,ErrorEnum.CREATE_EOR.getErrCode(),ErrorEnum.CREATE_EOR.getErrMsg());
@@ -90,8 +93,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
         boolean update = this.update(goods, goodsUpdateWrapper);
         AssertException.isTrue(update,ErrorEnum.UPDATE_EOR.getErrCode(),ErrorEnum.UPDATE_EOR.getErrMsg());
-
-        return new R<Boolean>();
+        R<Boolean> res = new R<Boolean>();
+        res.setData(update);
+        return res;
     }
 
     @Override
@@ -102,36 +106,37 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         QueryWrapper<Goods> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("goods_code",goodsCode);
         queryWrapper.eq("del_flag",TrueOrFalseEnum.FALSE_STAUTS.getFlag());
+        queryWrapper.ne("status", StatusConsts.DELETE_STATUS);  //查询出未删除的商品
 
         Goods goods = this.getOne(queryWrapper);
 
         result.setData(goods);
         return result;
     }
-
-    @Override
-    @Transactional
-    public R<Boolean> updateGoodsCount(@RequestBody GoodsUpdateCountBO updateCountBO) {
-        AssertException.isNotBlank(updateCountBO.getGoodsCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品编码为空");
-        AssertException.isNotNull(updateCountBO.getCount(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品数量为空");
-
-        QueryWrapper<Goods> queryWrapper = new QueryWrapper<Goods>()
-                .eq("goods_code",updateCountBO.getGoodsCode())
-                .eq("del_flag",TrueOrFalseEnum.FALSE_STAUTS.getFlag());
-        Goods goods = this.getOne(queryWrapper);
-        AssertException.isNotNull(goods,ErrorEnum.FAIL.getErrCode(),"商品不存在");
-        AssertException.isTrue(updateCountBO.getCount()>=goods.getItemCount(),ErrorEnum.UPDATE_EOR.getErrCode(),"商品总数量小于商品项数量");
-
-        UpdateWrapper<Goods> updateWrapper = new UpdateWrapper<Goods>()
-                .eq("goods_code",updateCountBO.getGoodsCode())
-                .le("item_count",updateCountBO.getCount())
-                .set("count",updateCountBO.getCount())
-                .set("update_time", TimeUtil.getCreateTime());
-        boolean update = this.update(updateWrapper);
-        AssertException.isTrue(update,ErrorEnum.UPDATE_EOR.getErrCode(),ErrorEnum.UPDATE_EOR.getErrMsg());
-
-        return new R<Boolean>();
-    }
+//
+//    @Override
+//    @Transactional
+//    public R<Boolean> updateGoodsCount(@RequestBody GoodsUpdateCountBO updateCountBO) {
+//        AssertException.isNotBlank(updateCountBO.getGoodsCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品编码为空");
+//        AssertException.isNotNull(updateCountBO.getCount(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品数量为空");
+//
+//        QueryWrapper<Goods> queryWrapper = new QueryWrapper<Goods>()
+//                .eq("goods_code",updateCountBO.getGoodsCode())
+//                .eq("del_flag",TrueOrFalseEnum.FALSE_STAUTS.getFlag());
+//        Goods goods = this.getOne(queryWrapper);
+//        AssertException.isNotNull(goods,ErrorEnum.FAIL.getErrCode(),"商品不存在");
+//        AssertException.isTrue(updateCountBO.getCount()>=goods.getItemCount(),ErrorEnum.UPDATE_EOR.getErrCode(),"商品总数量小于商品项数量");
+//
+//        UpdateWrapper<Goods> updateWrapper = new UpdateWrapper<Goods>()
+//                .eq("goods_code",updateCountBO.getGoodsCode())
+//                .le("item_count",updateCountBO.getCount())
+//                .set("count",updateCountBO.getCount())
+//                .set("update_time", TimeUtil.getCreateTime());
+//        boolean update = this.update(updateWrapper);
+//        AssertException.isTrue(update,ErrorEnum.UPDATE_EOR.getErrCode(),ErrorEnum.UPDATE_EOR.getErrMsg());
+//
+//        return new R<Boolean>();
+//    }
 
     @Override
     public R<PageResult> listGoods(@RequestBody GoodsListBO goodsListBO) {
@@ -141,9 +146,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         Page<Goods> page = new Page<>(goodsListBO.getPageNum(),goodsListBO.getPageSize());
         QueryWrapper<Goods> goodsQueryWrapper = new QueryWrapper<>();
         goodsQueryWrapper.eq("del_flag",TrueOrFalseEnum.FALSE_STAUTS.getFlag());
-        if (goodsListBO.getCreateTime()!=null){
+        if (goodsListBO.getStartTime()!=null){
             AssertException.isNotNull(goodsListBO.getEndTime(),ErrorEnum.VALIDATION_EOR.getErrCode(),"结束时间为空");
-            goodsQueryWrapper.between("create_time",goodsListBO.getCreateTime(),goodsListBO.getEndTime());
+            goodsQueryWrapper.between("create_time",goodsListBO.getStartTime(),goodsListBO.getEndTime());
         }
         if (StringUtils.isNotBlank(goodsListBO.getName())){
             goodsQueryWrapper.like("name",goodsListBO.getName());

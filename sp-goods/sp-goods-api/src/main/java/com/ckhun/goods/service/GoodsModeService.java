@@ -32,5 +32,4 @@ public interface GoodsModeService {
     @GetMapping("getModeByGoodsCode")
     public R<List<GoodsMode>> getByGoodsCode(@RequestParam("goodsCode") String goodsCode);
 
-
 }

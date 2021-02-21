@@ -4,7 +4,6 @@ import com.ckhun.goods.bo.goods.GoodsAddBO;
 import com.ckhun.goods.bo.goods.GoodsUpdateBO;
 import com.ckhun.goods.dto.goods.GoodsAddDTO;
 import com.ckhun.goods.dto.goods.GoodsListDTO;
-import com.ckhun.goods.dto.goods.GoodsUpdateCountDTO;
 import com.ckhun.goods.dto.goods.GoodsUpdateDTO;
 import com.ckhun.goods.pojo.Goods;
 import com.ckhun.goods.service.GoodsService;
@@ -59,12 +58,6 @@ public class GoodsController {
         return r;
     }
 
-    @PostMapping("setGoodsCount")
-    @ApiOperation(value = "更新商品数量",httpMethod = "POST")
-    public R<Boolean> setGoodsCount(@RequestBody GoodsUpdateCountDTO updateCountDTO){
-        R<Boolean> booleanR = goodsService.updateGoodsCount(updateCountDTO);
-        return booleanR;
-    }
 
     @PostMapping("list")
     @ApiOperation(value = "分页",httpMethod = "POST")

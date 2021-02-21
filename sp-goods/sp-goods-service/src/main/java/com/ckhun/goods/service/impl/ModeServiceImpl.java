@@ -6,6 +6,7 @@ import com.ckhun.common.AssertException;
 import com.ckhun.goods.bo.mode.ModeAddBO;
 import com.ckhun.goods.bo.mode.ModeDeleteBO;
 import com.ckhun.goods.bo.mode.ModeUpdateBO;
+import com.ckhun.goods.consts.StatusConsts;
 import com.ckhun.goods.mapper.ModeMapper;
 import com.ckhun.goods.pojo.GoodsMode;
 import com.ckhun.goods.pojo.Mode;
@@ -41,13 +42,14 @@ public class ModeServiceImpl extends ServiceImpl<ModeMapper, Mode> implements Mo
     public R<Boolean> addMode(@RequestBody ModeAddBO modeAddBO) {
         AssertException.isNotBlank(modeAddBO.getModeName(), ErrorEnum.VALIDATION_EOR.getErrCode(),"模式名不能为空");
         AssertException.isNotBlank(modeAddBO.getDescription(), ErrorEnum.VALIDATION_EOR.getErrCode(),"模式描述不能为空");
-        AssertException.isNotNull(modeAddBO.getStatus(), ErrorEnum.VALIDATION_EOR.getErrCode(),"模式状态不能为空");
+        AssertException.isNotNull(modeAddBO.getPlatformPercentage(), ErrorEnum.VALIDATION_EOR.getErrCode(),"商家占比不能为空");
 
         Mode mode = new Mode();
         mode.setDelFlag(TrueOrFalseEnum.TRUE_STAUTS.getStatus());
         mode.setModeName(modeAddBO.getModeName());
         mode.setDescription(modeAddBO.getDescription());
-        mode.setStatus(modeAddBO.getStatus());
+        mode.setPlatformPercentage(modeAddBO.getPlatformPercentage());
+        mode.setStatus(StatusConsts.WAIT_STATUS);   //新增
         mode.setCreateTime(TimeUtil.getCreateTime());
         mode.setUpdateTime(TimeUtil.getCreateTime());
 

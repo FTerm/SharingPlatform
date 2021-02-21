@@ -3,7 +3,7 @@ package com.ckhun.goods.service;
 import com.ckhun.goods.bo.classify.ClassifyAddBO;
 import com.ckhun.goods.bo.classify.ClassifyDelBO;
 import com.ckhun.goods.bo.classify.ClassifyUpdateBO;
-import com.ckhun.goods.pojo.Classify;
+import com.ckhun.goods.vo.classify.ClassifyListVO;
 import com.ckhun.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,5 +33,5 @@ public interface ClassifyService {
     public R<Boolean> updateClassify(@RequestBody ClassifyUpdateBO classifyUpdateBO);
 
     @GetMapping("listInfo")
-    public R<List<Classify>> listPage();
+    public R<List<ClassifyListVO>> listClassify();
 }

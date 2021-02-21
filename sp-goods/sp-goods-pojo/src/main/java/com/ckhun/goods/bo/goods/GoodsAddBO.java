@@ -21,9 +21,6 @@ public class GoodsAddBO {
     @ApiModelProperty("商品状态")
     private Integer stauts;
 
-    @ApiModelProperty("商品数量")
-    private Long count;
-
     @ApiModelProperty("商品单位")
     private String unit;
 
@@ -32,4 +29,8 @@ public class GoodsAddBO {
 
     @ApiModelProperty("所属商家")
     private String vendorCode;
+
+    @ApiModelProperty("所属品牌")
+    private String brandCode;
+
 }
