@@ -16,6 +16,8 @@ import com.ckhun.utils.ErrorEnum;
 import com.ckhun.utils.R;
 import com.ckhun.utils.TimeUtil;
 import com.ckhun.utils.TrueOrFalseEnum;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +51,7 @@ public class ClassifyServiceImpl extends ServiceImpl<ClassifyMapper, Classify> i
             //验证分类
             Classify classifyByPid = this.getById(classifyAddBO.getPid());
             AssertException.isTrue(classifyAddBO.getType()>classifyByPid.getType(),ErrorEnum.VALIDATION_EOR.getErrCode(),"分类类型越界");
-        }else{
+        }else {
             classifyAddBO.setPid(0);    //一级分类
         }
 
@@ -60,6 +62,8 @@ public class ClassifyServiceImpl extends ServiceImpl<ClassifyMapper, Classify> i
         classify.setStatus(StatusConsts.WAIT_STATUS);   //新增等待状态
         classify.setCreateTime(createTime);
         classify.setUpdateTime(createTime);
+        classify.setPid(classifyAddBO.getPid());
+        classify.setImg("noPath");
 
         boolean save = this.save(classify);
 
@@ -108,10 +112,15 @@ public class ClassifyServiceImpl extends ServiceImpl<ClassifyMapper, Classify> i
     }
 
     @Override
-    public R<List<ClassifyListVO>> listClassify() {
+    public R<List<ClassifyListVO>> classifyList() {
         R<List<ClassifyListVO>> classifyR = new R<>();
         List<ClassifyListVO> classifyListVOS = classifyMapper.listClassify();
         classifyR.setData(classifyListVOS);
         return classifyR;
+    }
+
+    @Override
+    public String test() {
+        return "hello";
     }
 }

@@ -1,9 +1,11 @@
 package com.ckhun.goods.service;
 
 import com.ckhun.goods.bo.goods.GoodsAddBO;
+import com.ckhun.goods.bo.goods.GoodsAllInfoByCodeAndSkuBO;
 import com.ckhun.goods.bo.goods.GoodsListBO;
 import com.ckhun.goods.bo.goods.GoodsUpdateBO;
 import com.ckhun.goods.pojo.Goods;
+import com.ckhun.goods.vo.goods.GoodsGoodsAllInfoVO;
 import com.ckhun.utils.PageResult;
 import com.ckhun.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
  * @Description
  */
 @FeignClient(name = "sp-goods")
-@RestController("goods-api")
 public interface GoodsService {
     /**
      * 新增商品
@@ -44,7 +45,19 @@ public interface GoodsService {
     public R<Goods> goodsByCode(@RequestParam("goodsCode") String goodsCode);
 
 
+    /**
+     * 分页返回
+     * @param goodsListBO
+     * @return
+     */
     @PostMapping("listPage")
     public R<PageResult> listGoods(@RequestBody GoodsListBO goodsListBO);
 
+    /**
+     * 返回全家
+     * @param goodsAllInfoByCodeAndSkuBO
+     * @return
+     */
+    @PostMapping("getAllInfoByCodeAndSku")
+    public R<GoodsGoodsAllInfoVO> allInfoByCodeAndSku(@RequestBody GoodsAllInfoByCodeAndSkuBO goodsAllInfoByCodeAndSkuBO);
 }

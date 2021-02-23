@@ -46,7 +46,6 @@ public class GoodsModeServiceImpl extends ServiceImpl<GoodsModeMapper, GoodsMode
         AssertException.isNotNull(goodsModeAddBO.getModeId(), ErrorEnum.VALIDATION_EOR.getErrCode(), "模式id为空");
         AssertException.isNotNull(goodsModeAddBO.getPrice(), ErrorEnum.VALIDATION_EOR.getErrCode(), "价格为空");
         AssertException.isNotNull(goodsModeAddBO.getStatus(), ErrorEnum.VALIDATION_EOR.getErrCode(), "商品状态为空");
-        AssertException.isNotNull(goodsModeAddBO.getTarget(), ErrorEnum.VALIDATION_EOR.getErrCode(), "商品模式期望价格为空");
 
         //商品验证
         QueryWrapper<Goods> goodsQueryWrapper = new QueryWrapper<Goods>()

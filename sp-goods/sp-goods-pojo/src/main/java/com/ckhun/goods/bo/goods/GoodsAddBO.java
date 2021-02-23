@@ -2,6 +2,7 @@ package com.ckhun.goods.bo.goods;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 
@@ -15,18 +16,21 @@ import lombok.Data;
 @ApiModel("商品新增BO")
 public class GoodsAddBO {
 
-    @ApiModelProperty("商品名")
+    @ApiModelProperty(value ="商品名")
     private String name;
 
-    @ApiModelProperty("商品状态")
+    @ApiModelProperty(value ="商品状态 0-新增未运营，1-正常, -1-删除")
     private Integer stauts;
 
-    @ApiModelProperty("商品单位")
+    @ApiModelProperty(value ="商品单位")
     private String unit;
 
-    @ApiModelProperty("商品类型")
+    @ApiModelProperty(value ="商品类型")
     private Integer type;
 
-    @ApiModelProperty("所属商家")
+    @ApiModelProperty(value ="所属商家")
     private String vendorCode;
+
+    @ApiModelProperty(value = "商品价钱")
+    private Long price;
 }

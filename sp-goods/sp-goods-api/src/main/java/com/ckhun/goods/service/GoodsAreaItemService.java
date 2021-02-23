@@ -5,7 +5,6 @@ import com.ckhun.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * create by one
@@ -14,13 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  */
 @FeignClient(name = "sp-goods")
-public interface GoodsAreaService {
-
-    @PostMapping("singleArea")
-    public R addSingleArea();
-
-    @PostMapping("listInfoByPlace")
-    public R listInfo(@RequestBody GoodsAreaItemListByPlaceDTO goodsAreaItemListByPlaceDTO);
-
+public interface GoodsAreaItemService {
 
 }

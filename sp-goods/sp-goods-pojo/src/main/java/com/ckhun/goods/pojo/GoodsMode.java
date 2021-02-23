@@ -37,10 +37,6 @@ public class GoodsMode implements Serializable {
     @ApiModelProperty("价钱")
     private Long price;
 
-    @TableField("target")
-    @ApiModelProperty("期望价钱")
-    private Long target;
-
     @TableField("status")
     @ApiModelProperty("状态")
     private Integer status;

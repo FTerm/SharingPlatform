@@ -28,32 +28,6 @@ public class GoodsItemController {
     @Autowired
     private GoodsItemService goodsItemService;
 
-    @PostMapping("batchAdd")
-    @ApiOperation(value = "批量新增商品项",httpMethod = "POST")
-    public R<Boolean> batchAdd(@RequestBody GoodsItemAddListDTO goodsItemAddListDTO) {
-
-        GoodsItemAddListBO goodsItemAddListBO = new GoodsItemAddListBO();
-        goodsItemAddListBO.setGoodsCode(goodsItemAddListDTO.getGoodsCode());
-        goodsItemAddListBO.setGoodsItemAddBOList(goodsItemAddListDTO.getGoodsItemAddBOList());
-        R<Boolean> booleanR = goodsItemService.batchAdd(goodsItemAddListBO);
-
-        return booleanR;
-    }
-
-    @PostMapping("updateGoodsItem")
-    @ApiOperation(value = "更新商品项",httpMethod = "POST")
-    public R<Boolean> updateGoodsItem(@RequestBody GoodsItemUpdateDTO goodsItemUpdateDTO){
-        R<Boolean> booleanR = goodsItemService.updateGoodsItem(goodsItemUpdateDTO);
-        return booleanR;
-    }
-
-    @PostMapping("delGoodsItem")
-    @ApiOperation(value = "删除商品项",httpMethod = "POST")
-    public R<Boolean> remove(@RequestBody GoodsItemDeleteDTO goodsItemDeleteDTO){
-        R<Boolean> remove = goodsItemService.remove(goodsItemDeleteDTO);
-        return remove;
-    }
-
     @GetMapping("bySku")
     @ApiOperation(value = "获得商品项信息",httpMethod = "GET")
     public R<GoodsItem> itemBySku(@RequestParam("sku") String sku){

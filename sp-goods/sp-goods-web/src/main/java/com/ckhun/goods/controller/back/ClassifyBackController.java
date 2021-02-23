@@ -1,27 +1,28 @@
-package com.ckhun.goods.controller;
+package com.ckhun.goods.controller.back;
 
+import com.ckhun.goods.bo.classify.ClassifyAddBO;
+import com.ckhun.goods.dto.classify.ClassifyAddDTO;
+import com.ckhun.goods.pojo.Classify;
 import com.ckhun.goods.service.ClassifyService;
 import com.ckhun.goods.vo.classify.ClassifyListVO;
 import com.ckhun.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * create by one
  *
- * @Date 2021/2/8 23:02
+ * @Date 2021/2/23 12:46
  * @Description
  */
 @RestController
-@RequestMapping("classify")
-@Api(tags = "分类Api")
-public class ClassifyController {
+@RequestMapping("classify—back")
+@Api(tags = "分类后台Api")
+public class ClassifyBackController {
 
     @Autowired
     private ClassifyService classifyService;
@@ -32,10 +33,10 @@ public class ClassifyController {
         return classifyService.classifyList();
     }
 
-    @GetMapping("test")
-    @ApiOperation(value = "测试", httpMethod = "GET")
-    public String test(){
-        return classifyService.test();
+    @PostMapping("add")
+    @ApiOperation(value = "新增分类", httpMethod = "POST")
+    public R<Boolean> add(@RequestBody ClassifyAddDTO classifyAddDTO){
+        return classifyService.addClassify(classifyAddDTO);
     }
 
 }

@@ -27,26 +27,6 @@ public class ModeController {
     @Autowired
     private ModeService modeService;
 
-    @PostMapping("add")
-    @ApiOperation(value = "新增模式",httpMethod = "POST")
-    public R<Boolean> addMode(@RequestBody ModeAddDTO modeAddDTO){
-        R<Boolean> booleanR = modeService.addMode(modeAddDTO);
-        return booleanR;
-    }
-
-    @PostMapping("deleteMode")
-    @ApiOperation(value = "删除模式",httpMethod = "POST")
-    public R<Boolean> remove(@RequestBody ModeDeleteDTO modeDeleteDTO){
-        R<Boolean> remove = modeService.remove(modeDeleteDTO);
-        return remove;
-    }
-
-    @PostMapping("updateMode")
-    @ApiOperation(value = "更新模式",httpMethod = "POST")
-    public R<Boolean> updateMode(@RequestBody ModeUpdateDTO modeUpdateDTO){
-        R<Boolean> booleanR = modeService.updateMode(modeUpdateDTO);
-        return booleanR;
-    }
 
     @GetMapping("byId")
     @ApiOperation(value = "根据id获取mode",httpMethod = "GET")

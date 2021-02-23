@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 /**
@@ -29,7 +30,7 @@ public class Classify {
 
     @TableField("pid")
     @ApiModelProperty("父id   0 --一级分类")
-    private String goodsCode;
+    private Integer pid;
 
     @TableField("status")
     @ApiModelProperty("状态")
@@ -50,4 +51,10 @@ public class Classify {
     @TableField("type")
     @ApiModelProperty("类型")
     private Integer type;
+
+    @TableField("img")
+    @ApiModelProperty(value = "类型")
+    private String img;
+
+
 }

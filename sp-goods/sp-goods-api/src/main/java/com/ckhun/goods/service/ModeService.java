@@ -17,7 +17,6 @@ import java.util.List;
  * @Description
  */
 @FeignClient(name = "sp-goods")
-@RestController("mode-api")
 public interface ModeService {
 
     @PostMapping("addMode")

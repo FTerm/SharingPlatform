@@ -14,22 +14,27 @@ import lombok.Data;
 @ApiModel("商品更新BO")
 public class GoodsUpdateBO {
 
-    @ApiModelProperty("商品编码")
+    @ApiModelProperty(value = "商品编码")
     private String goodsCode;
 
-    @ApiModelProperty("商品名")
+    @ApiModelProperty(value = "商品名")
     private String name;
 
-    @ApiModelProperty("商品状态")
+    @ApiModelProperty(value = "商品状态 0-新增未运营，1-正常, -1-删除")
     private Integer stauts;
 
-    @ApiModelProperty("商品单位")
+    @ApiModelProperty(value = "商品单位")
     private String unit;
 
-    @ApiModelProperty("商品类型")
+    @ApiModelProperty(value = "商品类型")
     private Integer type;
 
-    @ApiModelProperty("所属商家")
+    @ApiModelProperty(value = "所属商家")
     private String vendorCode;
+
+    @ApiModelProperty(value = "商品价钱")
+    private Long price;
+
+
 
 }

@@ -29,27 +29,6 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @PostMapping("add")
-    @ApiOperation(value = "新增商品",httpMethod = "POST")
-    public R<String> addGoods(@RequestBody GoodsAddDTO goodsAddDTO){
-
-        GoodsAddBO goodsAddBO = new GoodsAddBO();
-        BeanUtils.copyProperties(goodsAddDTO,goodsAddBO);
-
-        R<String> result = goodsService.add(goodsAddBO);
-        return result;
-    }
-
-    @PostMapping("update")
-    @ApiOperation(value = "更新商品",httpMethod = "POST")
-    public R<Boolean> updateGoods(@RequestBody GoodsUpdateDTO goodsUpdateDTO){
-
-        GoodsUpdateBO goodsUpdateBO = new GoodsUpdateBO();
-        BeanUtils.copyProperties(goodsUpdateDTO,goodsUpdateBO);
-
-        R<Boolean> update = goodsService.update(goodsUpdateBO);
-        return update;
-    }
 
     @GetMapping("getByCode")
     @ApiOperation(value = "根据code获取商品",httpMethod = "GET")
@@ -57,7 +36,6 @@ public class GoodsController {
         R<Goods> r = goodsService.goodsByCode(goodsCode);
         return r;
     }
-
 
     @PostMapping("list")
     @ApiOperation(value = "分页",httpMethod = "POST")

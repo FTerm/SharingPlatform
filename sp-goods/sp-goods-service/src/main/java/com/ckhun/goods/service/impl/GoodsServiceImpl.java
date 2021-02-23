@@ -6,21 +6,28 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ckhun.common.AssertException;
 import com.ckhun.goods.bo.goods.GoodsAddBO;
+import com.ckhun.goods.bo.goods.GoodsAllInfoByCodeAndSkuBO;
 import com.ckhun.goods.bo.goods.GoodsListBO;
 import com.ckhun.goods.bo.goods.GoodsUpdateBO;
 import com.ckhun.goods.consts.StatusConsts;
 import com.ckhun.goods.mapper.GoodsMapper;
-import com.ckhun.goods.pojo.Goods;
+import com.ckhun.goods.pojo.*;
+import com.ckhun.goods.service.GoodsModeService;
 import com.ckhun.goods.service.GoodsService;
+import com.ckhun.goods.vo.goods.GoodsGoodsAllInfoVO;
 import com.ckhun.utils.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * create by one
@@ -31,6 +38,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
 
+    @Autowired
+    private GoodsItemServiceImpl goodsItemService;
+    @Autowired
+    private GoodsModeServiceImpl goodsModeService;
+    @Autowired
+    private ModeServiceImpl modeService;
+    @Autowired
+    private GoodsAreaItemServiceImpl goodsAreaItemService;
+    @Autowired
+    private GoodsAreaServiceImpl goodsAreaService;
+
     @Override
     @Transactional
     public R<String> add(@RequestBody GoodsAddBO goodsAddBO) {
@@ -40,6 +58,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         AssertException.isNotBlank(goodsAddBO.getUnit(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品单位为空");
         AssertException.isNotNull(goodsAddBO.getType(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品类型为空");
         AssertException.isNotBlank(goodsAddBO.getVendorCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"所属商家编码为空");
+        AssertException.isNotNull(goodsAddBO.getVendorCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"所属商家编码为空");
 
         R<String> result = new R<>();
         //TODO 验证商家是否存在
@@ -174,6 +193,48 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         return resultR;
     }
 
+    @Override
+    public R<GoodsGoodsAllInfoVO> allInfoByCodeAndSku(@RequestBody GoodsAllInfoByCodeAndSkuBO goodsAllInfoByCodeAndSkuBO) {
+        AssertException.isNotNull(goodsAllInfoByCodeAndSkuBO.getGoodsCode(),ErrorEnum.VALIDATION_EOR.getErrCode(),"商品编码为空");
+        AssertException.isNotNull(goodsAllInfoByCodeAndSkuBO.getSku(),ErrorEnum.VALIDATION_EOR.getErrCode(),"SKU为空");
+
+        Goods goods = this.getOne(new QueryWrapper<Goods>()
+                .eq("goods_code", goodsAllInfoByCodeAndSkuBO.getGoodsCode())
+                .ne("status",StatusConsts.DELETE_STATUS));
+        AssertException.isNotNull(goods,ErrorEnum.FAIL.getErrCode(),"商品异常...");
+
+        GoodsItem goodsItem = goodsItemService.getOne(new QueryWrapper<GoodsItem>().
+                eq("goods_code", goodsAllInfoByCodeAndSkuBO.getGoodsCode()).
+                eq("sku", goodsAllInfoByCodeAndSkuBO.getSku()));
+        //TODO 状态判定
+        AssertException.isNotNull(goods,ErrorEnum.FAIL.getErrCode(),"商品异常...");
+
+        //至少支持模式才能出借
+        List<GoodsMode> goodsModes = goodsModeService.list(new QueryWrapper<GoodsMode>()
+                .eq("goods_code", goodsAllInfoByCodeAndSkuBO.getGoodsCode()));
+        AssertException.isTrue(!CollectionUtils.isEmpty(goodsModes),ErrorEnum.FAIL.getErrCode(),"商品模式异常");
+
+        //模式
+        List<Mode> modes = modeService.list();
+
+        //区域
+        GoodsAreaItem areaItem = goodsAreaItemService.getOne(new QueryWrapper<GoodsAreaItem>().eq("sku", goodsAllInfoByCodeAndSkuBO.getSku()));
+        GoodsArea goodsArea = goodsAreaService.getOne(new QueryWrapper<GoodsArea>().eq("area_code",areaItem.getAreaCode()));
+        AssertException.isNotNull(areaItem,ErrorEnum.FAIL.getErrCode(),"非法租赁...");
+        AssertException.isNotNull(goodsArea,ErrorEnum.FAIL.getErrCode(),"非法租赁...");
+
+        GoodsGoodsAllInfoVO goodsGoodsAllInfoVO = new GoodsGoodsAllInfoVO();
+        goodsGoodsAllInfoVO.setGoods(goods);
+        goodsGoodsAllInfoVO.setGoodsItem(goodsItem);
+        goodsGoodsAllInfoVO.setGoodsMode(goodsModes);
+        goodsGoodsAllInfoVO.setMode(modes);
+        goodsGoodsAllInfoVO.setGoodsAreaItem(areaItem);
+        goodsGoodsAllInfoVO.setGoodsArea(goodsArea);
+
+        R<GoodsGoodsAllInfoVO> r = new R<>();
+        r.setData(goodsGoodsAllInfoVO);
+        return r;
+    }
 
 
     private String genGoodsCode() {

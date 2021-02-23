@@ -5,6 +5,8 @@ import com.ckhun.goods.bo.classify.ClassifyDelBO;
 import com.ckhun.goods.bo.classify.ClassifyUpdateBO;
 import com.ckhun.goods.vo.classify.ClassifyListVO;
 import com.ckhun.utils.R;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +22,6 @@ import java.util.List;
  * @Description
  */
 @FeignClient(name = "sp-goods")
-@RestController("classify-api")
 public interface ClassifyService {
 
     @PostMapping("addClassify")
@@ -32,6 +33,9 @@ public interface ClassifyService {
     @PostMapping("updateClassify")
     public R<Boolean> updateClassify(@RequestBody ClassifyUpdateBO classifyUpdateBO);
 
-    @GetMapping("listInfo")
-    public R<List<ClassifyListVO>> listClassify();
+    @GetMapping("classifyList")
+    public R<List<ClassifyListVO>> classifyList();
+
+    @GetMapping("test")
+    public String test();
 }

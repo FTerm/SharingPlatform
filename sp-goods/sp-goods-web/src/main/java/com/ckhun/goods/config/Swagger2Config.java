@@ -1,5 +1,6 @@
 package com.ckhun.goods.config;
 
+import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -25,7 +26,7 @@ public class Swagger2Config {
     private static final String API_VERSION = "1.0.0";
 
     @Bean
-    public Docket createRestApi() {
+    public Docket createRestApi2() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()

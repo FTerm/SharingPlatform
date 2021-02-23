@@ -26,9 +26,6 @@ public class GoodsModeAddBO {
     @ApiModelProperty("价钱")
     private Long price;
 
-    @ApiModelProperty("期望价钱")
-    private Long target;
-
     @ApiModelProperty("状态")
     private Integer status;
 
